@@ -181,9 +181,46 @@ const INTERNSHIP_MODULES = [
       'Testing, debugging, and preparing apps for release.',
     ],
   },
+  {
+    number: '17',
+    title: 'Full-Stack MERN Development',
+    category: 'backend',
+    badge: 'MongoDB, Express, React, Node.js',
+    points: [
+      'Building full-stack applications with MongoDB, Express.js, React, and Node.js.',
+      'Creating REST APIs and connecting frontend applications to backend services.',
+      'Managing application state, authentication, and database operations.',
+      'Deploying and testing complete web applications.',
+    ],
+  },
+  {
+    number: '18',
+    title: 'Data Analytics',
+    category: 'backend',
+    badge: 'Data & Insights',
+    points: [
+      'Preparing, cleaning, and exploring datasets with Python and spreadsheets.',
+      'Analyzing data with Pandas and creating clear visualizations.',
+      'Building dashboards and communicating actionable insights.',
+      'Applying basic statistics to real-world business data.',
+    ],
+  },
+  {
+    number: '19',
+    title: 'Digital Marketing',
+    category: 'marketing',
+    badge: 'Digital Growth',
+    points: [
+      'Planning digital campaigns across search, social media, and email.',
+      'Learning SEO, content strategy, and paid advertising fundamentals.',
+      'Tracking campaign performance with web analytics and reporting.',
+      'Using audience insights to improve reach and engagement.',
+    ],
+  },
 ];
 
 const MODULE_COUNT = INTERNSHIP_MODULES.length;
+const HR_EMAIL = 'hrinfocognitix@gmail.com';
 
 // Hero slider slides data
 const HERO_SLIDES = [
@@ -278,7 +315,9 @@ export default function App() {
   // Confirmation modal state
   const [modalOpen, setModalOpen] = useState(false);
   const [modalSummary, setModalSummary] = useState('');
-  const [mailtoHref, setMailtoHref] = useState('mailto:hrinfo@cognitix.tech');
+  const [emailDraftUrl, setEmailDraftUrl] = useState(
+    `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(HR_EMAIL)}`
+  );
 
   // Auto-advance hero slider every 5 seconds
   useEffect(() => {
@@ -370,14 +409,16 @@ export default function App() {
           ? `Track: ${track} | Requirement: ${requirementType}`
           : `Organization: ${orgName.trim() || 'Not specified'} | Scope: ${serviceScope}`;
 
-      const summary = `Thank you, ${fullName.trim()}. Your ${typeLabel} request (${detailLine}) for ${officeHub} has been prepared. You can also send a direct email to hrinfo@cognitix.tech or call +91 7030901355.`;
+      const summary = `Thank you, ${fullName.trim()}. Your ${typeLabel} request (${detailLine}) for ${officeHub} is ready. Open the email draft to send it to ${HR_EMAIL}, or call +91 7030901355.`;
       setModalSummary(summary);
 
       const subject = encodeURIComponent(`[Cognitix Inquiry] ${typeLabel} - ${fullName.trim()}`);
       const body = encodeURIComponent(
         `Inquiry Type: ${typeLabel}\nName: ${fullName.trim()}\nPhone: ${phone.trim()}\nEmail: ${email.trim()}\nPreferred Hub: ${officeHub}\n${detailLine}\nDetails: ${message.trim() || 'N/A'}`
       );
-      setMailtoHref(`mailto:hrinfo@cognitix.tech?subject=${subject}&body=${body}`);
+      setEmailDraftUrl(
+        `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(HR_EMAIL)}&su=${subject}&body=${body}`
+      );
       setModalOpen(true);
     } catch (err) {
       console.error('Form submission error:', err);
@@ -465,14 +506,14 @@ export default function App() {
               </a>
               <span className="text-slate-400">|</span>
               <a
-                href="mailto:hrinfo@cognitix.tech"
+                href={`mailto:${HR_EMAIL}`}
                 className="hover:underline flex items-center gap-1.5 transition font-semibold text-slate-900 py-1 px-1.5 rounded-lg active:bg-white/50"
               >
                 <svg className="w-3.5 h-3.5 text-[#5B21B6] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <rect width="20" height="16" x="2" y="4" rx="2" />
                   <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
                 </svg>
-                <span>hrinfo@cognitix.tech</span>
+                <span>{HR_EMAIL}</span>
               </a>
               <span className="hidden md:inline text-slate-400">|</span>
               <a
@@ -617,7 +658,7 @@ export default function App() {
           <div className="pointer-events-none absolute -bottom-24 -left-24 w-80 sm:w-96 h-80 sm:h-96 rounded-full bg-[#EADFFF]/85 blur-3xl ctx-pulse-soft" />
 
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 md:py-20">
-            <div className="grid lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
               <div className="lg:col-span-6 space-y-5 sm:space-y-6 ctx-hero-entry">
                 <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/90 border border-[#D8C4FF] text-slate-900 text-xs sm:text-sm font-semibold shadow-sm">
                   <span className="w-2 h-2 rounded-full bg-[#7C3AED] ctx-pulse-soft" />
@@ -831,7 +872,7 @@ export default function App() {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-6 sm:gap-8 ctx-reveal">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 ctx-reveal">
               <div className="ctx-card rounded-3xl bg-gradient-to-b from-[#FAF7FF] to-white border border-[#EADFFF] p-6 sm:p-8 shadow-sm">
                 <h3 className="text-xl font-bold text-slate-900 mb-3">Our Core Focus</h3>
                 <p className="text-slate-700 text-sm sm:text-base leading-relaxed">
@@ -868,7 +909,7 @@ export default function App() {
               </h2>
             </div>
 
-            <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 ctx-reveal">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 ctx-reveal">
               <div className="ctx-card rounded-3xl bg-white/95 border border-[#EADFFF] p-6 sm:p-8 shadow-md">
                 <span className="px-3.5 py-1 rounded-full bg-[#F3ECFF] text-slate-900 border border-[#D8C4FF] text-xs font-bold">
                   01 • Training &amp; Internships
@@ -982,6 +1023,7 @@ export default function App() {
                   { id: 'frontend', label: 'Frontend & Design' },
                   { id: 'mobile', label: 'Mobile Development' },
                   { id: 'backend', label: 'Backend & Full-Stack' },
+                  { id: 'marketing', label: 'Marketing' },
                   { id: 'devops', label: 'Testing, Git & Projects' },
                 ].map((tab) => (
                   <button
@@ -1003,7 +1045,7 @@ export default function App() {
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search React, Spring Boot, Python, Git..."
+                placeholder="Search MERN, Flutter, analytics, marketing..."
                 className="w-full lg:w-72 px-4 py-2.5 rounded-xl border border-[#D8C4FF] bg-white text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#7C3AED]"
               />
             </div>
@@ -1020,7 +1062,7 @@ export default function App() {
                 </button>
               </div>
             ) : (
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filteredModules.map((mod, idx) => (
                   <div
                     key={mod.number}
@@ -1074,7 +1116,7 @@ export default function App() {
               </h2>
             </div>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-5 mb-14 ctx-reveal">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5 mb-14 ctx-reveal">
               {[
                 { title: 'Frontend', items: ['HTML', 'CSS', 'JavaScript', 'jQuery', 'ReactJS'] },
                 { title: 'Mobile', items: ['PhoneGap', 'Cordova'] },
@@ -1097,7 +1139,7 @@ export default function App() {
               <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-6">
                 Future Plans (5 Strategic Initiatives)
               </h3>
-              <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
                 {[
                   {
                     num: '01',
@@ -1141,7 +1183,7 @@ export default function App() {
         {/* Contact Section & Form */}
         <section id="contact" className="py-16 sm:py-20 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid lg:grid-cols-12 gap-8 lg:gap-10 items-start ctx-reveal">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start ctx-reveal">
               <div className="lg:col-span-5 ctx-card rounded-3xl bg-gradient-to-br from-[#F3ECFF] via-[#EADFFF] to-[#D8C4FF] border border-[#D8C4FF] text-slate-900 p-6 sm:p-8 shadow-lg space-y-5">
                 <h2 className="text-2xl font-extrabold text-slate-900">
                   Cognitix Software and Consultancy Pvt. Ltd.
@@ -1154,7 +1196,10 @@ export default function App() {
                     </a>
                   </p>
                   <p>
-                    <strong>Email:</strong> hrinfo@cognitix.tech / hrinfocognitix@gmail.com
+                    <strong>Email:</strong>{' '}
+                    <a href={`mailto:${HR_EMAIL}`} className="underline font-semibold">
+                      {HR_EMAIL}
+                    </a>
                   </p>
                   <p>
                     <strong>Website:</strong>{' '}
@@ -1206,7 +1251,7 @@ export default function App() {
                 </div>
 
                 <form onSubmit={handleFormSubmit} className="space-y-4">
-                  <div className="grid sm:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <input
                       type="text"
                       required
@@ -1225,7 +1270,7 @@ export default function App() {
                     />
                   </div>
 
-                  <div className="grid sm:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <input
                       type="email"
                       required
@@ -1246,7 +1291,7 @@ export default function App() {
                   </div>
 
                   {inquiryTab === 'internship' ? (
-                    <div className="grid sm:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <select
                         value={track}
                         onChange={(e) => setTrack(e.target.value)}
@@ -1270,7 +1315,7 @@ export default function App() {
                       </select>
                     </div>
                   ) : (
-                    <div className="grid sm:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <input
                         type="text"
                         value={orgName}
@@ -1329,10 +1374,12 @@ export default function App() {
               <p className="text-sm text-slate-600 leading-relaxed">{modalSummary}</p>
               <div className="pt-2 flex flex-col gap-2.5">
                 <a
-                  href={mailtoHref}
+                  href={emailDraftUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="ctx-btn w-full py-3.5 px-5 rounded-xl bg-gradient-to-r from-[#7C3AED] to-[#9333EA] text-white text-sm font-bold shadow-md hover:opacity-95"
                 >
-                  Send Direct Email Copy to HR / Consulting
+                  Open Email Draft to HR / Consulting
                 </a>
                 <button
                   type="button"
