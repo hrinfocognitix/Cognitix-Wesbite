@@ -221,6 +221,9 @@ const INTERNSHIP_MODULES = [
 
 const MODULE_COUNT = INTERNSHIP_MODULES.length;
 const HR_EMAIL = 'hrinfocognitix@gmail.com';
+const HR_SECONDARY_EMAIL = 'hrinfo@cognitix.tech';
+const HR_EMAIL_RECIPIENTS = `${HR_EMAIL},${HR_SECONDARY_EMAIL}`;
+const DEPLOYMENT_URL = 'https://cognitix-tech.vercel.app/';
 
 // Hero slider slides data
 const HERO_SLIDES = [
@@ -316,7 +319,7 @@ export default function App() {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalSummary, setModalSummary] = useState('');
   const [emailDraftUrl, setEmailDraftUrl] = useState(
-    `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(HR_EMAIL)}`
+    `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(HR_EMAIL_RECIPIENTS)}`
   );
 
   // Auto-advance hero slider every 5 seconds
@@ -409,7 +412,7 @@ export default function App() {
           ? `Track: ${track} | Requirement: ${requirementType}`
           : `Organization: ${orgName.trim() || 'Not specified'} | Scope: ${serviceScope}`;
 
-      const summary = `Thank you, ${fullName.trim()}. Your ${typeLabel} request (${detailLine}) for ${officeHub} is ready. Open the email draft to send it to ${HR_EMAIL}, or call +91 7030901355.`;
+      const summary = `Thank you, ${fullName.trim()}. Your ${typeLabel} request (${detailLine}) for ${officeHub} is ready. Open the email draft to send it to ${HR_EMAIL} and ${HR_SECONDARY_EMAIL}, or call +91 7030901355.`;
       setModalSummary(summary);
 
       const subject = encodeURIComponent(`[Cognitix Inquiry] ${typeLabel} - ${fullName.trim()}`);
@@ -417,7 +420,7 @@ export default function App() {
         `Inquiry Type: ${typeLabel}\nName: ${fullName.trim()}\nPhone: ${phone.trim()}\nEmail: ${email.trim()}\nPreferred Hub: ${officeHub}\n${detailLine}\nDetails: ${message.trim() || 'N/A'}`
       );
       setEmailDraftUrl(
-        `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(HR_EMAIL)}&su=${subject}&body=${body}`
+        `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(HR_EMAIL_RECIPIENTS)}&su=${subject}&body=${body}`
       );
       setModalOpen(true);
     } catch (err) {
@@ -515,9 +518,16 @@ export default function App() {
                 </svg>
                 <span>{HR_EMAIL}</span>
               </a>
+              <span className="hidden sm:inline text-slate-400">/</span>
+              <a
+                href={`mailto:${HR_SECONDARY_EMAIL}`}
+                className="hover:underline flex items-center gap-1.5 transition font-semibold text-slate-900 py-1 px-1.5 rounded-lg active:bg-white/50"
+              >
+                <span>{HR_SECONDARY_EMAIL}</span>
+              </a>
               <span className="hidden md:inline text-slate-400">|</span>
               <a
-                href="https://cognitix.tech/"
+                href={DEPLOYMENT_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hidden md:flex hover:underline items-center gap-1.5 transition font-semibold text-slate-900"
@@ -1200,10 +1210,14 @@ export default function App() {
                     <a href={`mailto:${HR_EMAIL}`} className="underline font-semibold">
                       {HR_EMAIL}
                     </a>
+                    {' / '}
+                    <a href={`mailto:${HR_SECONDARY_EMAIL}`} className="underline font-semibold">
+                      {HR_SECONDARY_EMAIL}
+                    </a>
                   </p>
                   <p>
                     <strong>Website:</strong>{' '}
-                    <a href="https://cognitix.tech/" target="_blank" rel="noopener noreferrer" className="underline font-semibold">
+                    <a href={DEPLOYMENT_URL} target="_blank" rel="noopener noreferrer" className="underline font-semibold">
                       https://cognitix.tech/
                     </a>
                   </p>
